@@ -1,0 +1,82 @@
+﻿@using Web.Areas.Admin.Models;
+@using Web.Utilities;
+@model Web.Models.Post
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+    <div class="pagatitle">
+        <h2>Xác nhận sửa Post</h2>
+    </div>
+
+    <div class="container shadow p-5">
+        <div class="row pb-2">
+            <h2>Sửa Post</h2>
+        </div>
+        <form methoad="post" asp-action="Edit">
+            <div asp-validation-summary="All"></div>
+            <div class="form-row"
+        <div class="form-group col-md-6">
+            <label asp-for="MenuID">Chọn mục</label>
+            <select asp-for="MenuID"
+                class="form-control"
+                asp-items="@(new SelectList(ViewBag.mnList, "Value", "Text"))">
+            </select>
+            <span asp-validation-for="MenuID" class="alert-danger"></span>
+        </div>
+                    <input type="text" class="form-control mb-3" asp-for="PostID" type="hidden">
+
+        <div class="form-group col-md-12">
+            <label asp-for="Title">Title</label>
+            <input type="text" class="form-control mb-3" asp-for="Title">
+        </div>
+        <div class="form-group col-md-12">
+            <label asp-for="Abstract">Abstract</label>
+            <input type="text" class="form-control mb-3" asp-for="Abstract">
+        </div>
+        <div class="form-group col-md-12">
+            <label class="control-label">Images</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-success" type="button" onclick="openDialog()">Choose a pic</button>
+                </div>
+                <input type="text" class="form-control" asp-for="Images" id="file_input" aria-describedby="button-addon2">
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <label asp-for="Contents">Content</label>
+            <textarea asp-for="Contents" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group col-md-6 mt-3 mb-3">
+            <label>
+                        @Html.CheckBox("IsActive", Model.IsActive)
+                Hiển thị
+            </label>
+        </div>
+        <div class="form-group d-none">
+            <input asp-for="CreatedDate" class="form-control" value="@Functions.getCurrentDate()" />
+        </div>
+        <div class="form-group d-none">
+            <input asp-for="PostOrder" class="form-control" value="1" />
+        </div>
+        <div class="form-group d-none">
+            <input asp-for="Category" class="form-control" value="1" />
+        </div>
+        <div class="form-group d-none">
+            <input asp-for="Status" class="form-control" value="1" />
+        </div>
+        <div class="form-group d-none">
+            <input asp-for="Link" class="form-control" value="1" />
+        </div>
+     </div>
+
+            <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Lưu</button>
+            <a asp-controller="Post" asp-action="Index" class="btn btn-lg btn-warning p-2">Quay lại</a>
+        </form>
+    </div>
+</main>
+@{
+    var summerNote = new Web.Areas.Admin.Models.SummerNote("#Contents");
+    <partial name="_SummerNote" model="summerNote" />
+}

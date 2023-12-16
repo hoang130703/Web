@@ -1,0 +1,28 @@
+﻿ @model IList<Web.Models.view_Post_Menu>
+ @using Web.Utilities
+<!-- Blog Section Begin -->
+<section class="blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="row g-5">
+                @foreach (var item in Model)
+                {
+                    string url = Functions.TitleSlugGeneration("post", item.Title, item.PostID);
+
+
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic set-bg" data-setbg="@item.Images"></div>
+                                <div class="blog__item__text">
+                                    <span><img src="img/icon/calendar.png" alt="">@item.CreatedDate.Value.ToString("dd-MM-yyyy")</span>
+                                    <h5>@item.Title</h5>
+                                    <p>@item.Abstract</p>
+                                    <a href="/@url">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->

@@ -1,0 +1,29 @@
+﻿@model Web.Models.Post
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+    <div class="pagatitle">
+        <h2>Xác nhận xóa Menu</h2>
+    </div>
+    <div class="form-row">
+        <div class="tox-form-group- col-md-6">
+            <label asp-for="PostID">PostID</label>
+            <input type="text" class="from-control mb-3" asp-for="PostID" disabled>
+        </div>
+        <div class="tox-form-group- col-md-6">
+            <label asp-for="Title">Title</label>
+            <input type="text" class="from-control mb-3" asp-for="Title" disabled>
+        </div>
+    </div>
+    <!--Begin Form-->
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="PostID" />
+        <a asp-controller="Post" asp-action="Index" class="btn btn-lg btn-warning p-2">Quay lại</a>
+        <button type="submit" class="btn btn-lg btn-danger p-2">
+            <i class="bi bi-trash-fill"></i> Xóa Post
+        </button>
+    </form>
+    <!--End Form-->
+
+</main>
